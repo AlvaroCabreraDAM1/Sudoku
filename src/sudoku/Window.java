@@ -36,15 +36,15 @@ public class Window extends JFrame {
     public void testAddCasilla() {
         JPanel testCasilla = new JPanel();
         GridLayout testCasillaL = new GridLayout(3, 3);
-        testCasillaL.setHgap(20);
-        testCasillaL.setVgap(10);
         testCasilla.setLayout(testCasillaL);
 
         for (int x = 1; x < 10; x++) {
+            JPanel panel = new JPanel();
             
-            JLabel testFicha = new JLabel(Integer.toString(x));
-
-            testCasilla.add(testFicha);
+            JLabel testFicha = new JLabel(" " + Integer.toString(x) + " ");
+            panel.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.black));
+            panel.add(testFicha);
+            testCasilla.add(panel);
         }
         this.testSudoku.add(testCasilla);
     }
