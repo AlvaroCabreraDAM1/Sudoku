@@ -5,11 +5,11 @@ public class Game {
     //Atributes
         
     //Constructors
-        
-    //Public Methods
-        
+    
     //Private Methods
-        
+    
+    //Public Methods
+         
     //Main
     
     public static void main(String[] args) {
