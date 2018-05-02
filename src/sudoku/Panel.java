@@ -1,23 +1,29 @@
 package sudoku;
 
-import java.util.ArrayList;
+import java.awt.*;
+import javax.swing.*;
 
-public class Panel {
+public class Panel extends JPanel {
 
     //Atributes
     private Cell cells[][] = new Cell[9][9];
 
     //Constructors
     public Panel(int cells[][]) {
+        
+        this.setLayout(new GridBagLayout());
 
         if (cells.length == 9 && cells[0].length == 9) {
             for (int row = 0; row < cells.length; row++) {
                 for (int col = 0; col < cells[row].length; col++) {
                     if (cells[row][col] > 0 && cells[row][col] < 10) {
                         this.cells[row][col] = ((Cell) new FixedCell(cells[row][col]));
+                        Constraints.edit(row, col, 1, 1, 0, 0);
+                        this.add(((FixedCell)this.cells[row][col]).getLabel(), Constraints.get());
                     }
                     else {
                         this.cells[row][col] = ((Cell) new VariableCell());
+                        this.add(((VariableCell)this.cells[row][col]).getField());
                     }
                 } 
             }

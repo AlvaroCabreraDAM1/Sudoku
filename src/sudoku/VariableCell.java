@@ -10,9 +10,14 @@ public class VariableCell extends Cell {
     //Constructors
     public VariableCell() {
         super();
+        this.field = new JTextField();
     }
 
     //Private Methods
     
     //Public Methods
+    public JTextField getField() {
+        return this.field;
+    }
+    
 }
