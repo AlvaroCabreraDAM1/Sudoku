@@ -1,20 +1,19 @@
 package sudoku;
 
-public class Game {
+import java.util.ArrayList;
+
+public class SudokuDatabase {
 
     //Atributes
-        
-    //Constructors
-    
+    private ArrayList<int[][]> sudokus;
+
+    //Constructor
+    public SudokuDatabase() {
+        generateSudokus();
+    }
+
     //Private Methods
-    
-    //Public Methods
-         
-    //Main
-    
-    public static void main(String[] args) {
-        
-        Window window = new Window("Sudoku");
+    private void generateSudokus() {
         int sudoku[][] = {
             {5, 3, 0, 0, 7, 0, 0, 0, 0},
             {6, 0, 0, 1, 9, 5, 0, 0, 0},
@@ -26,14 +25,12 @@ public class Game {
             {0, 0, 0, 4, 1, 9, 0, 0, 5},
             {0, 0, 0, 0, 8, 0, 0, 7, 9}
         };
-        Panel panel = new Panel(sudoku);
-        
-        Constraints.edit(0, 0, 9, 9, 1, 1);
-        Constraints.fill(0);
-        window.add(panel, Constraints.get());
-        
-        window.setVisible(true);
-        
+        this.sudokus.add(sudoku);
     }
-    
+
+    //Public Methods
+    public int[][] getSudoku() {
+        return this.sudokus.get(0);
+    }
+
 }

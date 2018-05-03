@@ -7,10 +7,10 @@ public class Panel extends JPanel {
 
     //Atributes
     private Cell cells[][] = new Cell[9][9];
-    private int w = 1;
-    private int a = 1;
-    private int s = 1;
-    private int d = 1;
+    private int topBorder = 1;
+    private int leftBorder = 1;
+    private int bottomBorder = 1;
+    private int rightBorder = 1;
 
     //Constructors
     public Panel(int cells[][]) {
@@ -25,13 +25,13 @@ public class Panel extends JPanel {
                         this.cells[row][col] = ((Cell) new FixedCell(cells[row][col]));
                         Constraints.edit(col, row, 1, 1, 1, 1);
                         setBorder(row, col);
-                        ((FixedCell) this.cells[row][col]).setBorder(w, a, s, d, Color.black);
+                        ((FixedCell) this.cells[row][col]).setBorder(topBorder, leftBorder, bottomBorder, rightBorder, Color.black);
                         this.add(((FixedCell) this.cells[row][col]).getLabel(), Constraints.get());
                     } else {
                         this.cells[row][col] = ((Cell) new VariableCell());
                         Constraints.edit(col, row, 1, 1, 1, 1);
                         setBorder(row, col);
-                        ((VariableCell) this.cells[row][col]).setBorder(w, a, s, d, Color.black);
+                        ((VariableCell) this.cells[row][col]).setBorder(topBorder, leftBorder, bottomBorder, rightBorder, Color.black);
                         this.add(((VariableCell) this.cells[row][col]).getField(), Constraints.get());
                     }
                 }
@@ -146,33 +146,33 @@ public class Panel extends JPanel {
     }
 
     private void setBorder(int row, int col) {
-        this.w = 1;
-        this.a = 1;
-        this.s = 1;
-        this.d = 1;
+        this.topBorder = 1;
+        this.leftBorder = 1;
+        this.bottomBorder = 1;
+        this.rightBorder = 1;
         if (row == 0) {
-            this.w = 4;
+            this.topBorder = 4;
         }
         if (row == 3 || row == 6) {
-            this.w = 2;
+            this.topBorder = 2;
         }
         if (col == 0) {
-            this.a = 4;
+            this.leftBorder = 4;
         }
         if (col == 3 || col == 6) {
-            this.a = 2;
+            this.leftBorder = 2;
         }
         if (row == 8) {
-            this.s = 4;
+            this.bottomBorder = 4;
         }
         if (row == 2 || row == 5) {
-            this.s = 2;
+            this.bottomBorder = 2;
         }
         if (col == 8) {
-            this.d = 4;
+            this.rightBorder = 4;
         }
         if (col == 2 || col == 5) {
-            this.d = 2;
+            this.rightBorder = 2;
         }
     }
 
