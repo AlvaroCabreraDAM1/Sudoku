@@ -11,7 +11,7 @@ public class Window extends JFrame {
     //Constructors
     public Window(String name) {
         super(name);
-        this.setSize(600, 500);
+        this.setSize(560, 500);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         container.setLayout(new GridBagLayout());

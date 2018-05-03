@@ -3,7 +3,7 @@ package sudoku;
 public class Cell {
 
     //Atributes
-    private int value;
+    private int value = 0;
     
     //Constructors
     public Cell() {
@@ -21,7 +21,7 @@ public class Cell {
         return this.value;
     }
 
-    public void setValue(int Value) {
+    public void setValue(int value) {
         this.value = value;
     }
     

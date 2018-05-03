@@ -12,7 +12,7 @@ public class Constraints {
         return constraints;
     }
     
-    public static void edit(int x, int y, int w, int h, int wx, int wy) {
+    public static void edit(int x, int y, int w, int h, double wx, double wy) {
         constraints.gridx = x;
         constraints.gridy = y;
         constraints.gridwidth = w;

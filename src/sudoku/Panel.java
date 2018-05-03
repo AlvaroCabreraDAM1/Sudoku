@@ -11,11 +11,13 @@ public class Panel extends JPanel {
     private int leftBorder = 1;
     private int bottomBorder = 1;
     private int rightBorder = 1;
+    private Warning warning;
 
     //Constructors
-    public Panel(int cells[][]) {
+    public Panel(int cells[][], Warning warning) {
 
         this.setLayout(new GridBagLayout());
+        this.warning = warning;
         Constraints.fill(0);
 
         if (cells.length == 9 && cells[0].length == 9) {
@@ -28,7 +30,7 @@ public class Panel extends JPanel {
                         ((FixedCell) this.cells[row][col]).setBorder(topBorder, leftBorder, bottomBorder, rightBorder, Color.black);
                         this.add(((FixedCell) this.cells[row][col]).getLabel(), Constraints.get());
                     } else {
-                        this.cells[row][col] = ((Cell) new VariableCell());
+                        this.cells[row][col] = ((Cell) new VariableCell(this));
                         Constraints.edit(col, row, 1, 1, 1, 1);
                         setBorder(row, col);
                         ((VariableCell) this.cells[row][col]).setBorder(topBorder, leftBorder, bottomBorder, rightBorder, Color.black);
@@ -41,7 +43,7 @@ public class Panel extends JPanel {
     }
 
     //Private Methods
-    private int validatePanel() {
+    public void validatePanel() {
 
         int result = 0;
 
@@ -52,41 +54,43 @@ public class Panel extends JPanel {
             result = 1;
         }
 
-        return result;
+        this.warning.actualize(result);
 
     }
 
     private int validateRows() {
         int result = 0;
         int count = 0;
-
         for (int row = 0; row < this.cells.length; row++) {
-            int values[] = new int[9];
+            int values[] = {0, 0, 0, 0, 0, 0, 0, 0, 0};
             for (int col = 0; col < this.cells[row].length; col++) {
-                values[this.cells[row][col].getValue() - 1]++;
+                if (this.cells[row][col].getValue() > 0 && this.cells[row][col].getValue() < 10) {
+                    values[this.cells[row][col].getValue() - 1]++;
+                }
             }
             if (this.validateValues(values) == -1) {
                 result = -1;
-                if (this.validateValues(values) == 1) {
-                    count++;
-                }
             }
-            if (count == 9) {
-                result = 1;
+            if (this.validateValues(values) == 1) {
+                count++;
             }
-        }
 
+        }
+        if (count == 9) {
+            result = 1;
+        }
         return result;
     }
 
     private int validateCols() {
         int result = 0;
         int count = 0;
-
         for (int col = 0; col < this.cells.length; col++) {
-            int values[] = new int[9];
+            int values[] = {0, 0, 0, 0, 0, 0, 0, 0, 0};
             for (int row = 0; row < this.cells.length; row++) {
-                values[this.cells[row][col].getValue() - 1]++;
+                if (this.cells[row][col].getValue() > 0 && this.cells[row][col].getValue() < 10) {
+                    values[this.cells[row][col].getValue() - 1]++;
+                }
             }
             if (this.validateValues(values) == -1) {
                 result = -1;
@@ -98,7 +102,6 @@ public class Panel extends JPanel {
         if (count == 9) {
             result = 1;
         }
-
         return result;
     }
 
@@ -107,10 +110,15 @@ public class Panel extends JPanel {
         int count = 0;
         for (int x = 0; x < this.cells.length; x += 3) {
             for (int y = 0; y < this.cells[x].length; y += 3) {
-                int values[] = new int[9];
+                int values[] = {0, 0, 0, 0, 0, 0, 0, 0, 0};
                 for (int row = 0; row < this.cells.length; row++) {
+                    for (int aux = 0; aux < values.length; aux++) {
+                        values[aux] = 0;
+                    }
                     for (int col = 0; col < this.cells[row].length; col++) {
-                        values[this.cells[row][col].getValue() - 1]++;
+                        if (this.cells[row][col].getValue() > 0 && this.cells[row][col].getValue() < 10) {
+                            values[this.cells[row][col].getValue() - 1]++;
+                        }
                     }
                 }
                 if (this.validateValues(values) == -1) {
@@ -141,7 +149,6 @@ public class Panel extends JPanel {
         if (count == 9) {
             result = 1;
         }
-
         return result;
     }
 
