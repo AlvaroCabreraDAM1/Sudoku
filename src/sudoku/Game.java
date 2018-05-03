@@ -16,7 +16,6 @@ public class Game {
         
         Window window = new Window("Sudoku");
         
-        
         int sudoku[][] = {
         {5, 3, 0, 0, 7, 0, 0, 0, 0},
         {6, 0, 0, 1, 9, 5, 0, 0, 0},
@@ -31,7 +30,8 @@ public class Game {
         
         Panel panel = new Panel(sudoku);
         
-        
+        Constraints.edit(0, 0, 9, 9, 1, 1);
+        Constraints.fill(0);
         window.add(panel, Constraints.get());
         
         window.setVisible(true);

@@ -1,6 +1,7 @@
 package sudoku;
 
-import javax.swing.JTextField;
+import java.awt.Color;
+import javax.swing.*;
 
 public class VariableCell extends Cell {
 
@@ -11,6 +12,7 @@ public class VariableCell extends Cell {
     public VariableCell() {
         super();
         this.field = new JTextField();
+        this.field.setHorizontalAlignment(SwingConstants.CENTER);
     }
 
     //Private Methods
@@ -18,6 +20,10 @@ public class VariableCell extends Cell {
     //Public Methods
     public JTextField getField() {
         return this.field;
+    }
+    
+    public void setBorder(int w, int a, int s, int d, Color color) {
+        this.field.setBorder(BorderFactory.createMatteBorder(w, a, s, d, color));
     }
     
 }

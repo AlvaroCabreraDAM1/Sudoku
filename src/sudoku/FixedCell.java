@@ -1,5 +1,6 @@
 package sudoku;
 
+import java.awt.Color;
 import javax.swing.*;
 
 public class FixedCell extends Cell {
@@ -11,6 +12,7 @@ public class FixedCell extends Cell {
     public FixedCell(int value) {
         super(value);
         this.label = new JLabel(Integer.toString(value));
+        this.label.setHorizontalAlignment(SwingConstants.CENTER);
     }
 
     //Private Methods
@@ -19,5 +21,9 @@ public class FixedCell extends Cell {
     public JLabel getLabel() {
         return this.label;
     }
-    
+
+    public void setBorder(int w, int a, int s, int d, Color color) {
+        this.label.setBorder(BorderFactory.createMatteBorder(w, a, s, d, color));
+    }
+
 }

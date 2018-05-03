@@ -7,25 +7,34 @@ public class Panel extends JPanel {
 
     //Atributes
     private Cell cells[][] = new Cell[9][9];
+    private int w = 1;
+    private int a = 1;
+    private int s = 1;
+    private int d = 1;
 
     //Constructors
     public Panel(int cells[][]) {
-        
+
         this.setLayout(new GridBagLayout());
+        Constraints.fill(0);
 
         if (cells.length == 9 && cells[0].length == 9) {
             for (int row = 0; row < cells.length; row++) {
                 for (int col = 0; col < cells[row].length; col++) {
                     if (cells[row][col] > 0 && cells[row][col] < 10) {
                         this.cells[row][col] = ((Cell) new FixedCell(cells[row][col]));
-                        Constraints.edit(row, col, 1, 1, 0, 0);
-                        this.add(((FixedCell)this.cells[row][col]).getLabel(), Constraints.get());
-                    }
-                    else {
+                        Constraints.edit(col, row, 1, 1, 1, 1);
+                        setBorder(row, col);
+                        ((FixedCell) this.cells[row][col]).setBorder(w, a, s, d, Color.black);
+                        this.add(((FixedCell) this.cells[row][col]).getLabel(), Constraints.get());
+                    } else {
                         this.cells[row][col] = ((Cell) new VariableCell());
-                        this.add(((VariableCell)this.cells[row][col]).getField());
+                        Constraints.edit(col, row, 1, 1, 1, 1);
+                        setBorder(row, col);
+                        ((VariableCell) this.cells[row][col]).setBorder(w, a, s, d, Color.black);
+                        this.add(((VariableCell) this.cells[row][col]).getField(), Constraints.get());
                     }
-                } 
+                }
             }
         }
 
@@ -66,7 +75,7 @@ public class Panel extends JPanel {
                 result = 1;
             }
         }
-        
+
         return result;
     }
 
@@ -136,13 +145,44 @@ public class Panel extends JPanel {
         return result;
     }
 
+    private void setBorder(int row, int col) {
+        this.w = 1;
+        this.a = 1;
+        this.s = 1;
+        this.d = 1;
+        if (row == 0) {
+            this.w = 4;
+        }
+        if (row == 3 || row == 6) {
+            this.w = 2;
+        }
+        if (col == 0) {
+            this.a = 4;
+        }
+        if (col == 3 || col == 6) {
+            this.a = 2;
+        }
+        if (row == 8) {
+            this.s = 4;
+        }
+        if (row == 2 || row == 5) {
+            this.s = 2;
+        }
+        if (col == 8) {
+            this.d = 4;
+        }
+        if (col == 2 || col == 5) {
+            this.d = 2;
+        }
+    }
+
     //Public Methods
     public int getCellValue(int row, int col) {
         return this.cells[row][col].getValue();
     }
-    
+
     public void setCellValue(int row, int col, int value) {
         this.cells[row][col].setValue(value);
     }
-    
+
 }
