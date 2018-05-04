@@ -4,16 +4,16 @@ public class Cell {
 
     //Atributes
     private int value = 0;
-    
+
     //Constructors
     public Cell() {
-        
+
     }
-    
+
     public Cell(int value) {
-       this.value = value; 
+        this.value = value;
     }
-    
+
     //Private Methods
     
     //Public Methods
@@ -24,5 +24,5 @@ public class Cell {
     public void setValue(int value) {
         this.value = value;
     }
-    
+
 }

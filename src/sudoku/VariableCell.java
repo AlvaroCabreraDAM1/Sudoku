@@ -42,14 +42,13 @@ public class VariableCell extends Cell implements FocusListener, ActionListener 
     }
 
     //Public Methods
-    public JTextField getField() {
-        return this.field;
+    @Override
+    public void actionPerformed(ActionEvent ae) {
+        if (validate() == true) {
+            this.panel.validatePanel();
+        }
     }
-
-    public void setBorder(int w, int a, int s, int d, Color color) {
-        this.field.setBorder(BorderFactory.createMatteBorder(w, a, s, d, color));
-    }
-
+    
     @Override
     public void focusGained(FocusEvent fe) {
         this.field.setBackground(Color.DARK_GRAY);
@@ -66,11 +65,12 @@ public class VariableCell extends Cell implements FocusListener, ActionListener 
 
     }
 
-    @Override
-    public void actionPerformed(ActionEvent ae) {
-        if (validate() == true) {
-            this.panel.validatePanel();
-        }
+    public JTextField getField() {
+        return this.field;
     }
 
+    public void setBorder(int w, int a, int s, int d, Color color) {
+        this.field.setBorder(BorderFactory.createMatteBorder(w, a, s, d, color));
+    }
+    
 }
